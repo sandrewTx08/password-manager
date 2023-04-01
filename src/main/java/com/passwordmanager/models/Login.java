@@ -1,6 +1,7 @@
 package com.passwordmanager.models;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,6 +17,7 @@ public class Login {
     ObjectId _id;
 
     @DBRef
+    @Indexed
     User user;
 
     @NonNull
