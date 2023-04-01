@@ -21,7 +21,7 @@ public class User {
     @NonNull
     String password;
 
-    public void setHashPassword() {
-        setPassword(BCrypt.hashpw(password, BCrypt.gensalt(12)));
+    public void setPassword() {
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
 }

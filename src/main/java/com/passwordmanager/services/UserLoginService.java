@@ -7,6 +7,8 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.passwordmanager.exceptions.UserInvalidId;
+import com.passwordmanager.exceptions.UserNotFound;
 import com.passwordmanager.models.Login;
 import com.passwordmanager.models.User;
 import com.passwordmanager.repositories.LoginRepository;
@@ -20,20 +22,26 @@ public class UserLoginService {
     @Autowired
     UserRepository userRepository;
 
-    public List<Login> findUserLogins(ObjectId userId) {
-        Optional<User> user = userRepository.findById(userId);
+    public List<Login> findUserLogins(String userId) throws Exception {
+        if (!ObjectId.isValid(userId))
+            throw new UserInvalidId();
+
+        Optional<User> user = userRepository.findById(new ObjectId(userId));
 
         if (user.isEmpty())
-            return null;
+            throw new UserNotFound();
 
         return loginRepository.findUserLogins(user.get().get_id());
     }
 
-    public Login createUserLogin(ObjectId userId, Login login) {
-        Optional<User> user = userRepository.findById(userId);
+    public Login createUserLogin(String userId, Login login) throws Exception {
+        if (!ObjectId.isValid(userId))
+            throw new UserInvalidId();
+
+        Optional<User> user = userRepository.findById(new ObjectId(userId));
 
         if (user.isEmpty())
-            return null;
+            throw new UserNotFound();
 
         login.setUser(user.get());
 

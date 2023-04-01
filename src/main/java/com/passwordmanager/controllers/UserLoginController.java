@@ -2,7 +2,6 @@ package com.passwordmanager.controllers;
 
 import java.util.List;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,18 +17,18 @@ import com.passwordmanager.services.UserLoginService;
 @RequestMapping("user/{userId}")
 public class UserLoginController {
     @Autowired
-    UserLoginService service;
+    UserLoginService userLoginService;
 
     @GetMapping
     public List<Login> findUserLogins(
-            @PathVariable("userId") ObjectId userId) {
-        return service.findUserLogins(userId);
+            @PathVariable("userId") String userId) throws Exception {
+        return userLoginService.findUserLogins(userId);
     }
 
     @PostMapping
     public Login createUserLogin(
-            @PathVariable("userId") ObjectId userId,
-            @RequestBody Login login) {
-        return service.createUserLogin(userId, login);
+            @PathVariable("userId") String userId,
+            @RequestBody Login login) throws Exception {
+        return userLoginService.createUserLogin(userId, login);
     }
 }

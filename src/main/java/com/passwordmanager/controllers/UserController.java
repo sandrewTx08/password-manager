@@ -16,7 +16,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody User user) throws Throwable {
         return userService.createUser(user);
     }
 }
