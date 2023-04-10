@@ -8,9 +8,11 @@ import com.mongodb.lang.NonNull;
 
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Document
 @Data
+@NoArgsConstructor
 public class User {
     @Id
     ObjectId _id;

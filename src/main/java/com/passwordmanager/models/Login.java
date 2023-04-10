@@ -9,8 +9,10 @@ import com.mongodb.lang.NonNull;
 
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Document
+@NoArgsConstructor
 @Data
 public class Login {
     @Id
@@ -18,6 +20,7 @@ public class Login {
 
     @DBRef
     @Indexed
+    @NonNull
     User user;
 
     @NonNull

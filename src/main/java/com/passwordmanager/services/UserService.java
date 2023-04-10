@@ -1,9 +1,11 @@
 package com.passwordmanager.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.passwordmanager.exceptions.UserAlreadyExists;
+import com.passwordmanager.exceptions.UserEmailAlreadyExists;
 import com.passwordmanager.models.User;
 import com.passwordmanager.repositories.UserRepository;
 
@@ -12,14 +14,12 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User createUser(User newUser) throws Exception {
-        User user = userRepository.findUserByEmail(newUser.getEmail());
+    public User createUser(User user) throws UserEmailAlreadyExists {
+        Optional<User> userByEmail = userRepository.findUserByEmail(user.getEmail());
 
-        if (user == null) {
-            userRepository.save(newUser);
-            return newUser;
-        }
+        if (userByEmail.isEmpty())
+            return userRepository.insert(user);
 
-        throw new UserAlreadyExists();
+        throw new UserEmailAlreadyExists();
     }
 }

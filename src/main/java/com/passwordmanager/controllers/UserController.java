@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.passwordmanager.exceptions.UserEmailAlreadyExists;
 import com.passwordmanager.models.User;
 import com.passwordmanager.services.UserService;
 
@@ -16,7 +17,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user) throws Throwable {
+    public User createUser(@RequestBody User user) throws UserEmailAlreadyExists {
         return userService.createUser(user);
     }
 }

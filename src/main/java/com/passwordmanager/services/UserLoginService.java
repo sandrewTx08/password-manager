@@ -7,44 +7,30 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.passwordmanager.exceptions.UserInvalidId;
-import com.passwordmanager.exceptions.UserNotFound;
 import com.passwordmanager.models.Login;
 import com.passwordmanager.models.User;
-import com.passwordmanager.repositories.LoginRepository;
+import com.passwordmanager.repositories.UserLoginRepository;
 import com.passwordmanager.repositories.UserRepository;
 
 @Service
 public class UserLoginService {
     @Autowired
-    LoginRepository loginRepository;
+    UserLoginRepository loginRepository;
 
     @Autowired
     UserRepository userRepository;
 
-    public List<Login> findUserLogins(String userId) throws Exception {
-        if (!ObjectId.isValid(userId))
-            throw new UserInvalidId();
+    public List<Optional<Login>> findUserLogins(ObjectId userId) {
+        User user = userRepository.findById(userId).orElseThrow();
 
-        Optional<User> user = userRepository.findById(new ObjectId(userId));
-
-        if (user.isEmpty())
-            throw new UserNotFound();
-
-        return loginRepository.findUserLogins(user.get().get_id());
+        return loginRepository.findUserLogins(user.get_id());
     }
 
-    public Login createUserLogin(String userId, Login login) throws Exception {
-        if (!ObjectId.isValid(userId))
-            throw new UserInvalidId();
+    public Login createUserLogin(ObjectId userId, Login login) {
+        User user = userRepository.findById(userId).orElseThrow();
 
-        Optional<User> user = userRepository.findById(new ObjectId(userId));
+        login.setUser(user);
 
-        if (user.isEmpty())
-            throw new UserNotFound();
-
-        login.setUser(user.get());
-
-        return loginRepository.save(login);
+        return loginRepository.insert(login);
     }
 }
