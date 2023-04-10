@@ -15,7 +15,7 @@ import com.passwordmanager.repositories.UserRepository;
 @Service
 public class UserLoginService {
     @Autowired
-    UserLoginRepository loginRepository;
+    UserLoginRepository userLoginRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -23,7 +23,7 @@ public class UserLoginService {
     public List<Optional<Login>> findUserLogins(ObjectId userId) {
         User user = userRepository.findById(userId).orElseThrow();
 
-        return loginRepository.findUserLogins(user.get_id());
+        return userLoginRepository.findUserLogins(user.get_id());
     }
 
     public Login createUserLogin(ObjectId userId, Login login) {
@@ -31,6 +31,6 @@ public class UserLoginService {
 
         login.setUser(user);
 
-        return loginRepository.insert(login);
+        return userLoginRepository.insert(login);
     }
 }
