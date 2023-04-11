@@ -1,7 +1,5 @@
 package com.passwordmanager.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +13,9 @@ public class UserService {
     UserRepository userRepository;
 
     public User createUser(User user) throws UserEmailAlreadyExists {
-        Optional<User> userByEmail = userRepository.findUserByEmail(user.getEmail());
+        Boolean userByEmail = userRepository.existsByEmail(user.getEmail());
 
-        if (userByEmail.isEmpty())
+        if (!userByEmail)
             return userRepository.insert(user);
 
         throw new UserEmailAlreadyExists();

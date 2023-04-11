@@ -1,7 +1,6 @@
 package com.passwordmanager.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class UserLoginController {
     UserLoginService userLoginService;
 
     @GetMapping
-    public List<Optional<Login>> findUserLogins(
+    public List<Login> findUserLogins(
             @PathVariable("userId") ObjectId userId) {
         return userLoginService.findUserLogins(userId);
     }

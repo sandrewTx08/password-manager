@@ -1,7 +1,6 @@
 package com.passwordmanager.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class UserLoginService {
     @Autowired
     UserRepository userRepository;
 
-    public List<Optional<Login>> findUserLogins(ObjectId userId) {
+    public List<Login> findUserLogins(ObjectId userId) {
         User user = userRepository.findById(userId).orElseThrow();
 
         return userLoginRepository.findUserLogins(user.get_id());
