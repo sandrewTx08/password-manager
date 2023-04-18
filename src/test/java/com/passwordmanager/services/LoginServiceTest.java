@@ -8,21 +8,22 @@ import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.passwordmanager.models.Login;
 import com.passwordmanager.models.User;
 import com.passwordmanager.repositories.LoginRepository;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class LoginServiceTest {
-    @Autowired
+    @InjectMocks
     LoginService loginService;
 
-    @MockBean
+    @Mock
     LoginRepository loginRepository;
 
     @Test
