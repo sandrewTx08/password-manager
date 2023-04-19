@@ -6,25 +6,21 @@ import org.springframework.stereotype.Service;
 
 import com.passwordmanager.models.Login;
 import com.passwordmanager.repositories.LoginRepository;
+import com.passwordmanager.repositories.LoginRepositoryImpl;
 
 @Service
 public class LoginService {
     @Autowired
     LoginRepository loginRepository;
 
+    @Autowired
+    LoginRepositoryImpl loginRepositoryImpl;
+
     public void deleteById(ObjectId loginId) {
         loginRepository.deleteById(loginId);
     }
 
-    public Login updateLogin(ObjectId loginId, Login login) {
-        Login loginById = loginRepository.findById(loginId).orElseThrow();
-
-        loginById.setWebsite(login.getWebsite());
-        loginById.setUsername(login.getUsername());
-        loginById.setPassword(login.getPassword());
-
-        loginRepository.deleteById(loginId);
-
-        return loginRepository.insert(loginById);
+    public Boolean updateLogin(ObjectId loginId, Login login) {
+        return loginRepositoryImpl.updateLogin(loginId, login).isPresent();
     }
 }

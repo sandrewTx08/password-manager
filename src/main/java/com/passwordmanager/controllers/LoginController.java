@@ -26,7 +26,7 @@ public class LoginController {
     }
 
     @PatchMapping
-    public Login updateLogin(
+    public Boolean updateLogin(
             @PathVariable("loginId") ObjectId loginId,
             @Validated @RequestBody Login login) {
         return loginService.updateLogin(loginId, login);
