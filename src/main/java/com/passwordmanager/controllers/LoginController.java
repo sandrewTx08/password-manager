@@ -21,13 +21,13 @@ public class LoginController {
 
     @DeleteMapping
     public void deleteById(
-            @PathVariable("loginId") ObjectId loginId) {
+            @PathVariable ObjectId loginId) {
         loginService.deleteById(loginId);
     }
 
     @PatchMapping
     public Boolean updateLogin(
-            @PathVariable("loginId") ObjectId loginId,
+            @PathVariable ObjectId loginId,
             @Validated @RequestBody Login login) {
         return loginService.updateLogin(loginId, login);
     }

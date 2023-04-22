@@ -23,13 +23,13 @@ public class UserLoginController {
 
     @GetMapping
     public List<Login> findUserLogins(
-            @PathVariable("userId") ObjectId userId) {
+            @PathVariable ObjectId userId) {
         return userLoginService.findUserLogins(userId);
     }
 
     @PutMapping
     public Login createUserLogin(
-            @PathVariable("userId") ObjectId userId,
+            @PathVariable ObjectId userId,
             @Validated @RequestBody Login login) {
         return userLoginService.createUserLogin(userId, login);
     }

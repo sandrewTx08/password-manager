@@ -1,6 +1,7 @@
 package com.passwordmanager.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user) throws UserEmailAlreadyExists {
+    public User createUser(@Validated @RequestBody User user) throws UserEmailAlreadyExists {
         return userService.createUser(user);
     }
 }

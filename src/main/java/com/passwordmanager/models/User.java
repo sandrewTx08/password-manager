@@ -1,12 +1,13 @@
 package com.passwordmanager.models;
 
 import org.bson.types.ObjectId;
-import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.mongodb.lang.NonNull;
 
-import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,16 +15,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class User {
-    @Id
+    @MongoId
     ObjectId _id;
 
     @NonNull
+    @Indexed(unique = true)
     String email;
 
     @NonNull
     String password;
 
-    public void setPassword() {
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
+    public void setPassword(String password) {
+        this.password = new BCryptPasswordEncoder().encode(password);
     }
 }
