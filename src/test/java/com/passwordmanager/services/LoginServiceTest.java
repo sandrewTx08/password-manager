@@ -2,6 +2,7 @@ package com.passwordmanager.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
@@ -58,10 +59,12 @@ public class LoginServiceTest {
         Login update = new Login();
         update.setWebsite("example.com");
 
+        Date updated = new Date();
         loginService.updateLogin(login.get_id(), update);
 
         Optional<Login> updatedLogin = loginRepository.findById(login.get_id());
 
         assertEquals(updatedLogin.orElseThrow().getWebsite(), update.getWebsite());
+        assertEquals(updatedLogin.orElseThrow().getUpdated().toString(), updated.toString());
     }
 }
