@@ -18,20 +18,20 @@ import lombok.NoArgsConstructor;
 @Data
 public class Login {
     @MongoId
-    ObjectId _id;
+    private ObjectId _id;
 
     @DBRef
     @Indexed
     @NonNull
-    User user;
+    private User user;
 
     @NonNull
-    String website;
+    private String website;
 
-    String username;
+    private String username;
 
     @NonNull
-    String password;
+    private String password;
 
-    Date updated;
+    private Date updated;
 }

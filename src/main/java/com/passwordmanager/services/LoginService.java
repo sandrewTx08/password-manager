@@ -1,5 +1,7 @@
 package com.passwordmanager.services;
 
+import java.util.Optional;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class LoginService {
         loginRepository.deleteById(loginId);
     }
 
-    public Boolean updateLogin(ObjectId loginId, Login login) {
-        return loginRepositoryImpl.updateLogin(loginId, login).isPresent();
+    public Optional<Login> updateLogin(ObjectId loginId, Login login) {
+        return loginRepositoryImpl.updateLogin(loginId, login);
     }
 }

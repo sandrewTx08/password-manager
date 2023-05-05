@@ -16,11 +16,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails user = userRepository
+        UserDetails userDetails = userRepository
                 .findByEmail(username)
                 .map(UserDetailsImpl::new)
                 .orElseThrow();
 
-        return user;
+        return userDetails;
     }
 }

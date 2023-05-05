@@ -1,5 +1,7 @@
 package com.passwordmanager.controllers;
 
+import java.util.Optional;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -26,7 +28,7 @@ public class LoginController {
     }
 
     @PatchMapping
-    public Boolean updateLogin(
+    public Optional<Login> updateLogin(
             @PathVariable ObjectId loginId,
             @Validated @RequestBody Login login) {
         return loginService.updateLogin(loginId, login);

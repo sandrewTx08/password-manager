@@ -16,14 +16,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
     @MongoId
-    ObjectId _id;
+    private ObjectId _id;
 
     @NonNull
     @Indexed(unique = true)
-    String email;
+    private String email;
 
     @NonNull
-    String password;
+    private String password;
 
     public void setPassword(String password) {
         this.password = new BCryptPasswordEncoder().encode(password);
