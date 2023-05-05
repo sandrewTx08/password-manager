@@ -15,7 +15,7 @@ import com.passwordmanager.services.UserService;
 @RequestMapping("user")
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @PostMapping
     public User createUser(@Validated @RequestBody User user) throws UserEmailAlreadyExists {

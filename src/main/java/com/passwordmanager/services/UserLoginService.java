@@ -14,10 +14,10 @@ import com.passwordmanager.repositories.UserRepository;
 @Service
 public class UserLoginService {
     @Autowired
-    UserLoginRepository userLoginRepository;
+    private UserLoginRepository userLoginRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public List<Login> findUserLogins(ObjectId userId) {
         User user = userRepository.findById(userId).orElseThrow();

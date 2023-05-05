@@ -17,7 +17,7 @@ import com.passwordmanager.services.LoginService;
 @RequestMapping("login/{loginId}")
 public class LoginController {
     @Autowired
-    LoginService loginService;
+    private LoginService loginService;
 
     @DeleteMapping
     public void deleteById(

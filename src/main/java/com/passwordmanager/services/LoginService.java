@@ -11,10 +11,10 @@ import com.passwordmanager.repositories.LoginRepositoryImpl;
 @Service
 public class LoginService {
     @Autowired
-    LoginRepository loginRepository;
+    private LoginRepository loginRepository;
 
     @Autowired
-    LoginRepositoryImpl loginRepositoryImpl;
+    private LoginRepositoryImpl loginRepositoryImpl;
 
     public void deleteById(ObjectId loginId) {
         loginRepository.deleteById(loginId);

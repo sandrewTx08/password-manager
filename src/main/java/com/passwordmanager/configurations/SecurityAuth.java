@@ -16,12 +16,12 @@ import com.passwordmanager.services.UserDetailsServiceImpl;
 @EnableWebSecurity
 @Configuration
 public class SecurityAuth {
-    final RequestMatcher[] ignoringRequestMatchers = {
+    private final RequestMatcher[] ignoringRequestMatchers = {
             new AntPathRequestMatcher("/user", "POST")
     };
 
     @Autowired
-    UserDetailsServiceImpl userDetailsServiceImpl;
+    private UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

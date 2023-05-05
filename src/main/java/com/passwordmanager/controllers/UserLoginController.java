@@ -19,7 +19,7 @@ import com.passwordmanager.services.UserLoginService;
 @RequestMapping("user/{userId}/login")
 public class UserLoginController {
     @Autowired
-    UserLoginService userLoginService;
+    private UserLoginService userLoginService;
 
     @GetMapping
     public List<Login> findUserLogins(

@@ -10,7 +10,7 @@ import com.passwordmanager.repositories.UserRepository;
 @Service
 public class UserService {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public User createUser(User user) throws UserEmailAlreadyExists {
         Boolean userByEmail = userRepository.existsByEmail(user.getEmail());
