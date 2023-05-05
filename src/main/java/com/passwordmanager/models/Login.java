@@ -1,5 +1,7 @@
 package com.passwordmanager.models;
 
+import java.util.Date;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -30,4 +32,6 @@ public class Login {
 
     @NonNull
     String password;
+
+    Date updated;
 }
