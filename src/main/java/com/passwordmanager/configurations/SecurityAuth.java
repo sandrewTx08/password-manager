@@ -17,7 +17,8 @@ import com.passwordmanager.services.UserDetailsServiceImpl;
 @Configuration
 public class SecurityAuth {
     private final RequestMatcher[] ignoringRequestMatchers = {
-            new AntPathRequestMatcher("/user", "POST")
+            new AntPathRequestMatcher("/user", "POST"),
+            new AntPathRequestMatcher("/", "GET")
     };
 
     @Autowired
@@ -26,10 +27,7 @@ public class SecurityAuth {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(ignoringRequestMatchers)
-                        .ignoringRequestMatchers(
-                                new AntPathRequestMatcher("/user/**/login", "PUT")))
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         auth -> auth
                                 .requestMatchers(ignoringRequestMatchers)
@@ -37,7 +35,7 @@ public class SecurityAuth {
                                 .anyRequest()
                                 .authenticated())
                 .userDetailsService(userDetailsServiceImpl)
-                .formLogin()
+                .httpBasic()
                 .and()
                 .build();
     }
