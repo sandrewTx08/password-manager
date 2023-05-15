@@ -29,7 +29,7 @@ public class UserLoginServiceTest {
 
     @BeforeAll
     public void beforeAll() {
-        user.set_id(new ObjectId());
+        user.setId(new ObjectId());
         user.setEmail("login@example.com");
         user.setPassword("password123");
 
@@ -50,7 +50,7 @@ public class UserLoginServiceTest {
 
     @Test
     public void findUserLogins() {
-        List<Login> userLogins = userLoginService.findUserLogins(user.get_id());
+        List<Login> userLogins = userLoginService.findUserLogins(user.getId());
 
         assertEquals(login.get_id(), userLogins.get(0).get_id());
     }

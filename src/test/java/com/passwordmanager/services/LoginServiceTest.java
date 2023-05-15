@@ -35,7 +35,7 @@ public class LoginServiceTest {
 
     @BeforeAll
     public void beforeAll() {
-        user.set_id(new ObjectId());
+        user.setId(new ObjectId());
         user.setEmail("login@example.com");
         user.setPassword("password123");
 

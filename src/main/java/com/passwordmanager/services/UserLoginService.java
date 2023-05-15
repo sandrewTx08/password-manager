@@ -20,9 +20,7 @@ public class UserLoginService {
     private UserRepository userRepository;
 
     public List<Login> findUserLogins(ObjectId userId) {
-        User user = userRepository.findById(userId).orElseThrow();
-
-        return userLoginRepository.findUserLogins(user.get_id());
+        return userLoginRepository.findUserLogins(userId);
     }
 
     public Login createUserLogin(ObjectId userId, Login login) {

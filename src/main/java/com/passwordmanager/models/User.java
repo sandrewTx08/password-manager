@@ -28,4 +28,8 @@ public class User {
     public void setPassword(String password) {
         this.password = new BCryptPasswordEncoder().encode(password);
     }
+
+    public String get_id() {
+        return this._id.toString();
+    }
 }
