@@ -9,6 +9,6 @@ import org.springframework.data.mongodb.repository.Query;
 import com.passwordmanager.models.Login;
 
 public interface UserLoginRepository extends MongoRepository<Login, ObjectId> {
-    @Query(value = "{'user.$id': ?0}", fields = "{user: 0}")
+    @Query("{'user.$id': ?0}")
     public List<Login> findUserLogins(ObjectId userId);
 }

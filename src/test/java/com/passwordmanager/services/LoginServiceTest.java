@@ -35,14 +35,14 @@ public class LoginServiceTest {
 
     @BeforeAll
     public void beforeAll() {
-        user.setId(new ObjectId());
+        user.set_id(new ObjectId());
         user.setEmail("login@example.com");
         user.setPassword("password123");
 
         mongoTemplate.save(user);
 
         login.setUser(user);
-        login.setWebsite("https://example.com");
+        login.setDomain("https://example.com");
         login.setPassword("admin123");
 
         mongoTemplate.save(login);
@@ -57,14 +57,14 @@ public class LoginServiceTest {
     @Test
     public void updateLogin() {
         Login update = new Login();
-        update.setWebsite("example.com");
+        update.setDomain("example.com");
 
         Date updated = new Date();
-        loginService.updateLogin(login.get_id(), update);
+        loginService.updateLogin(new ObjectId(login.get_id()), update);
 
-        Optional<Login> updatedLogin = loginRepository.findById(login.get_id());
+        Optional<Login> updatedLogin = loginRepository.findById(new ObjectId(login.get_id()));
 
-        assertEquals(updatedLogin.orElseThrow().getWebsite(), update.getWebsite());
+        assertEquals(updatedLogin.orElseThrow().getDomain(), update.getDomain());
         assertEquals(updatedLogin.orElseThrow().getUpdated().toString(), updated.toString());
     }
 }

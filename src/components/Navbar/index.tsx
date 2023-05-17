@@ -10,10 +10,10 @@ import { IoSettingsSharp } from "react-icons/io5";
 
 export default function Component() {
   const router = useRouter();
-  const [user] = useContext(Context);
+  const [data] = useContext(Context);
 
   return (
-    <Navbar bg="primary" variant="dark" expand="lg">
+    <Navbar bg="primary" variant="dark" expand="md">
       <Container>
         <Navbar.Brand onClick={() => router.push("/")}>
           Password manager
@@ -21,10 +21,12 @@ export default function Component() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse>
           <Nav className="me-auto">
-            {user ? (
+            {data ? (
               <>
-                <Nav.Link onClick={() => router.push("/")}>Logins</Nav.Link>
-                <NavDropdown title={user.email}>
+                <Nav.Link onClick={() => router.push("/logins")}>
+                  Logins
+                </Nav.Link>
+                <NavDropdown title={data.user.email}>
                   <NavDropdown.Item
                     className="d-inline-flex justify-content-between align-items-center"
                     onClick={() => router.push("/settings/profile")}
@@ -48,11 +50,7 @@ export default function Component() {
                 </NavDropdown>
               </>
             ) : (
-              <>
-                <Nav.Link onClick={() => router.push("/login")}>
-                  Sign-in
-                </Nav.Link>
-              </>
+              <Nav.Link href="/login">Sign-in</Nav.Link>
             )}
             <Nav.Link
               className="d-block d-md-none"

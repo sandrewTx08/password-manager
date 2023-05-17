@@ -3,7 +3,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "@/components/Navbar";
 import UserProvider from "@/contexts/User";
+import LoginsProvider from "@/contexts/Logins";
 import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 
 export const metadata = {
   title: "Password Manager",
@@ -11,7 +13,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
-  const [state, stateSet] = useState(null);
+  const [user, userSet] = useState(null);
+  const [logins, loginsSet] = useState(null);
 
   useEffect(() => {
     fetch("/userdetails", {
@@ -21,18 +24,31 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
       },
     })
       .then((response) => response.json())
-      .then(stateSet);
+      .then((data) => {
+        fetch(`/user/${data.user._id}/login`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then(loginsSet);
+
+        userSet(data);
+      });
   }, []);
 
   return (
     <html lang="en">
       <body>
-        <UserProvider state={[state, stateSet]}>
-          <header>
-            <Navbar />
-          </header>
+        <UserProvider state={[user, userSet]}>
+          <LoginsProvider state={[logins, loginsSet]}>
+            <header>
+              <Navbar />
+            </header>
 
-          {children}
+            <Container className="mt-3 mx-3">{children}</Container>
+          </LoginsProvider>
         </UserProvider>
       </body>
     </html>

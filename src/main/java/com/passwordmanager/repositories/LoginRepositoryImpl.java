@@ -19,20 +19,39 @@ public class LoginRepositoryImpl {
     private MongoTemplate mongoTemplate;
 
     public Optional<Login> updateLogin(ObjectId loginId, Login login) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is(loginId));
+        Query query = new Query()
+                .addCriteria(Criteria
+                        .where("_id")
+                        .is(loginId));
 
-        Update update = new Update();
+        Optional<Login> loginById = Optional.of(
+                mongoTemplate
+                        .findOne(query, Login.class));
 
-        if (login.getWebsite() != null)
-            update.set("website", login.getWebsite());
-        if (login.getUsername() != null)
-            update.set("username", login.getUsername());
-        if (login.getPassword() != null)
-            update.set("password", login.getPassword());
+        if (loginById.isPresent()) {
+            Update update = new Update();
 
-        update.set("updated", new Date());
+            if (login.getDomain() != null)
+                update.set("domain", login.getDomain());
+            else
+                update.set("domain", loginById.get().getDomain());
 
-        return Optional.of(mongoTemplate.findAndModify(query, update, Login.class));
+            if (login.getUsername() != null)
+                update.set("username", login.getUsername());
+            else
+                update.set("username", loginById.get().getUsername());
+
+            if (login.getPassword() != null)
+                update.set("password", login.getPassword());
+            else
+                update.set("password", loginById.get().getPassword());
+
+            update.set("user", loginById.get().getUser());
+            update.set("updated", new Date());
+
+            return Optional.of(mongoTemplate.findAndModify(query, update, Login.class));
+        }
+
+        return loginById;
     }
 }

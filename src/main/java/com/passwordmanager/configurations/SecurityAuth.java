@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.passwordmanager.services.UserDetailsServiceImpl;
 
@@ -24,14 +25,16 @@ public class SecurityAuth {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .requestMatchers(HttpMethod.GET, "/index.html", "/", "_next/**")
+                                .requestMatchers(
+                                        AntPathRequestMatcher
+                                                .antMatcher(HttpMethod.POST, "/user"))
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
                 .userDetailsService(userDetailsServiceImpl)
                 .formLogin()
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/index.html", true)
+                .defaultSuccessUrl("/", true)
                 .failureUrl("/login?error=true")
                 .and()
                 .build();

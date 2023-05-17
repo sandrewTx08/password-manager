@@ -26,7 +26,7 @@ public class Login {
     private User user;
 
     @NonNull
-    private String website;
+    private String domain;
 
     private String username;
 
@@ -34,4 +34,8 @@ public class Login {
     private String password;
 
     private Date updated;
+
+    public String get_id() {
+        return this._id.toString();
+    }
 }

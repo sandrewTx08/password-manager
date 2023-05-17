@@ -29,14 +29,14 @@ public class UserLoginServiceTest {
 
     @BeforeAll
     public void beforeAll() {
-        user.setId(new ObjectId());
+        user.set_id(new ObjectId());
         user.setEmail("login@example.com");
         user.setPassword("password123");
 
         mongoTemplate.save(user);
 
         login.setUser(user);
-        login.setWebsite("https://example.com");
+        login.setDomain("https://example.com");
         login.setPassword("admin123");
 
         mongoTemplate.save(login);
@@ -50,7 +50,7 @@ public class UserLoginServiceTest {
 
     @Test
     public void findUserLogins() {
-        List<Login> userLogins = userLoginService.findUserLogins(user.getId());
+        List<Login> userLogins = userLoginService.findUserLogins(new ObjectId(user.get_id()));
 
         assertEquals(login.get_id(), userLogins.get(0).get_id());
     }
