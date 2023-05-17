@@ -2,9 +2,9 @@
 
 import { createContext } from "react";
 
-type Data = any;
+export type Data = any;
 
-type State = [Data, React.Dispatch<Data>];
+export type State = [Data, React.Dispatch<Data>];
 
 export const Context = createContext<State>([null, null]);
 

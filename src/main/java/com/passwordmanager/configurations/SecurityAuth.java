@@ -34,7 +34,7 @@ public class SecurityAuth {
                 .userDetailsService(userDetailsServiceImpl)
                 .formLogin()
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("/logins.html", true)
                 .failureUrl("/login?error=true")
                 .and()
                 .build();

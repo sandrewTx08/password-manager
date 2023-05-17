@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import UserProvider from "@/contexts/User";
 import LoginsProvider from "@/contexts/Logins";
 import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
 
 export const metadata = {
   title: "Password Manager",
@@ -47,7 +46,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
               <Navbar />
             </header>
 
-            <Container className="mt-3 mx-3">{children}</Container>
+            {children}
           </LoginsProvider>
         </UserProvider>
       </body>
