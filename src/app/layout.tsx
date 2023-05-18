@@ -46,7 +46,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
               <Navbar />
             </header>
 
-            {children}
+            <main className="pt-3">{children}</main>
           </LoginsProvider>
         </UserProvider>
       </body>

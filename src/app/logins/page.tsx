@@ -1,12 +1,15 @@
 "use client";
 
 import { Context, Data } from "@/contexts/Logins";
-import { Tab, Row, Col, ListGroup, Form, Button } from "react-bootstrap";
+import { Tab, Row, Col, ListGroup, Form, InputGroup } from "react-bootstrap";
 import { useDebounce } from "use-debounce";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
+  BsEye,
+  BsEyeFill,
   BsFillClipboard2Fill,
   BsFillPencilFill,
+  BsFillTrash3Fill,
   BsGlobe2,
 } from "react-icons/bs";
 
@@ -16,19 +19,20 @@ function CreateLogin({ data }: React.PropsWithChildren<{ data: Data }>) {
 
 function LoginTabPane({ data }: React.PropsWithChildren<{ data: Data }>) {
   const [loginData, loginSet] = useState(data);
+  const [loginDataInput] = useDebounce(loginData, 1000);
   const [editing, editingSet] = useState(true);
-  const [login] = useDebounce(loginData, 1000);
+  const [showPasswordInput, showPasswordInputSet] = useState(false);
 
   useEffect(() => {
-    fetch(`/login/${login._id}`, {
+    fetch(`/login/${loginDataInput._id}`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
       method: "PATCH",
-      body: JSON.stringify(login),
+      body: JSON.stringify(loginDataInput),
     });
-  }, [login]);
+  }, [loginDataInput]);
 
   function onChange(event: React.ChangeEvent) {
     loginSet((value) => {
@@ -40,59 +44,76 @@ function LoginTabPane({ data }: React.PropsWithChildren<{ data: Data }>) {
 
   return (
     <Tab.Pane eventKey={data._id}>
-      <h1 className="d-flex justify-content-between">
-        <BsGlobe2 /> {loginData.domain}
-        <div>
-          <Button
-            onClick={() => editingSet((value) => !value)}
-            variant="outline-primary"
-          >
-            <BsFillPencilFill />
-            Edit
-          </Button>
+      <div className="d-flex justify-content-between ellipsis mb-4">
+        <div className="d-flex gap-3">
+          <BsGlobe2 className="fs-1 ml-1" />
+          <h2>
+            <b>{loginData.domain}</b>
+          </h2>
         </div>
-      </h1>
 
-      <div>
-        <Form.Control
-          size="sm"
-          name="username"
-          type="text"
-          disabled={editing}
-          placeholder="Username"
-          value={loginData.username}
-          onChange={onChange}
-        />
-        <Button
-          variant="primary"
-          onClick={() => navigator.clipboard.writeText(loginData.username)}
-        >
-          <BsFillClipboard2Fill /> Copy
-        </Button>
+        <div className="d-flex gap-3">
+          <BsFillPencilFill
+            className="p-2 fs-1"
+            onClick={() => editingSet((value) => !value)}
+          />
+          <BsFillTrash3Fill className="p-2 fs-1" />
+        </div>
       </div>
 
       <div>
-        <Form.Control
-          size="sm"
-          name="password"
-          type="password"
-          disabled={editing}
-          placeholder="Password"
-          value={loginData.password}
-          onChange={onChange}
-        />
-        <Button
-          variant="primary"
-          onClick={() => navigator.clipboard.writeText(loginData.password)}
-        >
-          <BsFillClipboard2Fill /> Copy
-        </Button>
+        <InputGroup>
+          <Form.Control
+            size="sm"
+            name="username"
+            type="text"
+            disabled={editing}
+            className="mb-2"
+            placeholder="Username"
+            value={loginData.username}
+            onChange={onChange}
+          />
+          <BsFillClipboard2Fill
+            className="m-2"
+            onClick={() => navigator.clipboard.writeText(loginData.username)}
+          />
+        </InputGroup>
+
+        <InputGroup>
+          <Form.Control
+            size="sm"
+            name="password"
+            type={showPasswordInput ? "text" : "password"}
+            disabled={editing}
+            className="mb-2"
+            placeholder="Password"
+            value={loginData.password}
+            onChange={onChange}
+          />
+
+          {showPasswordInput ? (
+            <BsEye
+              className="fs-4 m-2"
+              onClick={() => showPasswordInputSet((value) => !value)}
+            />
+          ) : (
+            <BsEyeFill
+              className="fs-4 m-2"
+              onClick={() => showPasswordInputSet((value) => !value)}
+            />
+          )}
+
+          <BsFillClipboard2Fill
+            className="m-2"
+            onClick={() => navigator.clipboard.writeText(loginData.password)}
+          />
+        </InputGroup>
       </div>
     </Tab.Pane>
   );
 }
 
-export default function RootLayout() {
+export default function Page() {
   return (
     <Context.Consumer>
       {([state]) =>
@@ -101,12 +122,12 @@ export default function RootLayout() {
             id="list-group-tabs-example"
             defaultActiveKey={state[0]._id}
           >
-            <Row>
-              <Col md={4}>
+            <Row className="container-fluid d-flex justify-content-between">
+              <Col xs={4}>
                 <ListGroup>
                   {state.map((data) => (
                     <ListGroup.Item
-                      className="overflow-hidden"
+                      className="text-truncate"
                       key={data._id}
                       eventKey={data._id}
                       action
@@ -116,7 +137,7 @@ export default function RootLayout() {
                   ))}
                 </ListGroup>
               </Col>
-              <Col md={8}>
+              <Col xs={8}>
                 <Tab.Content>
                   {state.map((data) => (
                     <LoginTabPane key={data._id} data={data} />
