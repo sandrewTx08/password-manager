@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateLoginFormComponent } from './create-login-form/create-login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TabLoginFormComponent } from './tab-login-form/tab-login-form.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginsComponent,
     NavbarComponent,
     CreateLoginFormComponent,
+    TabLoginFormComponent,
   ],
   imports: [
     BrowserModule,

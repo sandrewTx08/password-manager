@@ -18,4 +18,8 @@ public class LoginService {
     public Login insertLogin(Login login) {
         return loginRepository.insert(login);
     }
+
+    public Login updateLogin(Login login) {
+        return loginRepository.save(login);
+    }
 }

@@ -27,4 +27,11 @@ export class LoginsService {
       this.logins.push(data);
     });
   }
+
+  public updateLogin(login: Login) {
+    return this.http.patch<Login>('logins', login).subscribe((data) => {
+      this.logins[this.logins.findIndex((value) => value._id === login._id)] =
+        data;
+    });
+  }
 }

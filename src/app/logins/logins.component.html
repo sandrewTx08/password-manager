@@ -4,6 +4,6 @@
   ></tab>
 
   <tab *ngFor="let login of loginsService.logins" heading="{{ login.domain }}">
-    Domain: {{ login.domain }}</tab
-  >
+    <app-tab-login-form [login]="login"></app-tab-login-form>
+  </tab>
 </tabset>
