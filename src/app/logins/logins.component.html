@@ -1,0 +1,9 @@
+<tabset [vertical]="true" type="pills">
+  <tab heading="Create login"
+    ><app-create-login-form></app-create-login-form
+  ></tab>
+
+  <tab *ngFor="let login of loginsService.logins" heading="{{ login.domain }}">
+    Domain: {{ login.domain }}</tab
+  >
+</tabset>
