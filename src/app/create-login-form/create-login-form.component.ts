@@ -8,6 +8,8 @@ import { LoginsService } from '../logins.service';
   styleUrls: ['./create-login-form.component.css'],
 })
 export class CreateLoginFormComponent {
+  public showPassword: boolean = false;
+
   public formGroup: FormGroup = new FormGroup({
     domain: new FormControl(),
     username: new FormControl(),
@@ -18,5 +20,9 @@ export class CreateLoginFormComponent {
 
   public ngSubmit() {
     this.loginsService.createLogin(this.formGroup.value);
+  }
+
+  public showPasswordClick() {
+    this.showPassword = !this.showPassword;
   }
 }

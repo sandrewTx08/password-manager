@@ -1,4 +1,58 @@
-<form [formGroup]="formGroup">
-  <input type="text" formControlName="username" (change)="change()" />
-  <input type="text" formControlName="password" (change)="change()" />
+<form class="d-flex flex-column gap-4" [formGroup]="formGroup">
+  <div class="row">
+    <div class="col">
+      <h1>{{ login.domain }}</h1>
+    </div>
+
+    <div class="d-flex gap-3 col">
+      <button class="btn btn-warning" (click)="editingClick()">Edit</button>
+      <button class="btn btn-danger">Remove</button>
+    </div>
+  </div>
+
+  <div class="form-floating d-flex gap-2" *ngIf="editing">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Recipient's username"
+      id="floatingInput"
+      aria-label="Recipient's username with one button addons"
+      formControlName="username"
+      (change)="change()"
+    />
+    <label for="floatingInput">Username</label>
+    <button class="btn btn-outline-secondary" type="button">Copy</button>
+  </div>
+
+  <div *ngIf="!editing">
+    <div class="fs-6 text-secondary">Username</div>
+    <div class="fs-4">{{ login.username }}</div>
+  </div>
+
+  <div class="form-floating d-flex gap-2" *ngIf="editing">
+    <input
+      [type]="showPassword ? 'text' : 'password'"
+      class="form-control"
+      placeholder="Recipient's password"
+      formControlName="password"
+      id="floatingPassword"
+      aria-label="Recipient's password with two button addons"
+      formControlName="password"
+      (change)="change()"
+    />
+    <label for="floatingPassword">Password</label>
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      (click)="showPasswordClick()"
+    >
+      Show
+    </button>
+    <button class="btn btn-outline-secondary" type="button">Copy</button>
+  </div>
+
+  <div *ngIf="!editing">
+    <div class="fs-6 text-secondary">Password</div>
+    <div class="fs-4">{{ login.password }}</div>
+  </div>
 </form>

@@ -9,7 +9,7 @@
         class="btn btn-primary dropdown-toggle"
         aria-controls="dropdown-basic"
       >
-        EE<span class="caret"></span>
+        {{ userService.user.email || "..." }}<span class="caret"></span>
       </button>
       <ul
         id="dropdown-basic"
@@ -26,7 +26,7 @@
         </li>
         <li class="divider dropdown-divider"></li>
         <li role="menuitem">
-          <a class="dropdown-item" routerLink="/logout">Logout</a>
+          <a class="dropdown-item" href="/logout">Logout</a>
         </li>
       </ul>
     </div>

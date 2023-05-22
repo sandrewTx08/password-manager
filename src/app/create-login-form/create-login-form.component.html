@@ -1,6 +1,51 @@
-<form [formGroup]="formGroup" (ngSubmit)="ngSubmit()">
-  <input type="text" formControlName="domain" />
-  <input type="text" formControlName="username" />
-  <input type="text" formControlName="password" />
-  <button type="submit"></button>
+<form
+  [formGroup]="formGroup"
+  class="d-flex flex-column gap-3"
+  (ngSubmit)="ngSubmit()"
+>
+  <h1>Create a login</h1>
+
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="domain"
+      placeholder="Recipient's domain"
+      aria-label="Recipient's domain with one button addons"
+      formControlName="domain"
+    />
+    <button class="btn btn-outline-secondary" type="button">Copy</button>
+  </div>
+
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Recipient's username"
+      aria-label="Recipient's username with one button addons"
+      formControlName="username"
+    />
+    <button class="btn btn-outline-secondary" type="button">Copy</button>
+  </div>
+
+  <div class="input-group">
+    <input
+      [type]="showPassword ? 'text' : 'password'"
+      class="form-control"
+      placeholder="Recipient's password"
+      formControlName="password"
+      aria-label="Recipient's password with two button addons"
+      formControlName="password"
+    />
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      (click)="showPasswordClick()"
+    >
+      Show
+    </button>
+    <button class="btn btn-outline-secondary" type="button">Copy</button>
+  </div>
+
+  <button class="btn btn-secondary d-inline" type="submit">Submit</button>
 </form>

@@ -12,6 +12,9 @@ export class TabLoginFormComponent implements OnInit {
   public login: Login = Object();
   public formGroup: FormGroup = Object();
 
+  public showPassword: boolean = false;
+  public editing: boolean = false;
+
   constructor(private loginsService: LoginsService) {}
 
   public ngOnInit(): void {
@@ -23,5 +26,13 @@ export class TabLoginFormComponent implements OnInit {
 
   public change() {
     this.loginsService.updateLogin(this.formGroup.value);
+  }
+
+  public showPasswordClick() {
+    this.showPassword = !this.showPassword;
+  }
+
+  public editingClick() {
+    this.editing = !this.editing;
   }
 }
