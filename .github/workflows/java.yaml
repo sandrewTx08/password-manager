@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Java CI
 
 on:
   push:
@@ -32,11 +32,3 @@ jobs:
           cache: maven
 
       - run: mvn -B package test
-
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - run: yarn install
-      - run: yarn ng build
