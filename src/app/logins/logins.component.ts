@@ -13,7 +13,7 @@ export class LoginsComponent implements OnInit {
     public loginsService: LoginsService
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.userService.getUserDetails();
     this.loginsService.findManyLogins();
   }
