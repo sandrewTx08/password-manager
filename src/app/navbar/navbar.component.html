@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" routerLink="/">Password Manager</a>
     <div class="btn-group" dropdown>
       <button
         id="button-basic"
@@ -9,7 +9,8 @@
         class="btn btn-primary dropdown-toggle"
         aria-controls="dropdown-basic"
       >
-        {{ userService.user.email || "..." }}<span class="caret"></span>
+        {{ userDetailsService.userDetails.user.email || "..."
+        }}<span class="caret"></span>
       </button>
       <ul
         id="dropdown-basic"
