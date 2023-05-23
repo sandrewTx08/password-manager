@@ -37,9 +37,7 @@ export class LoginsService {
 
   public deleteLogin(login: Login) {
     return this.http.delete<void>(`logins/${login._id}`).subscribe(() => {
-      delete this.logins[
-        this.logins.findIndex((value) => value._id === login._id)
-      ];
+      this.logins = this.logins.filter((value) => value._id != login._id);
     });
   }
 }
