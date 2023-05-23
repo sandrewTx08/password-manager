@@ -35,4 +35,8 @@ export class TabLoginFormComponent implements OnInit {
   public editingClick() {
     this.editing = !this.editing;
   }
+
+  public deleteLogin() {
+    this.loginsService.deleteLogin(this.login);
+  }
 }

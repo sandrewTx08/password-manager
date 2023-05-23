@@ -22,4 +22,8 @@ public class LoginService {
     public Login updateLogin(Login login) {
         return loginRepository.save(login);
     }
+
+    public void deleteLogin(ObjectId logindId) {
+        loginRepository.deleteById(logindId);
+    }
 }
