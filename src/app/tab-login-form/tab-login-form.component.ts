@@ -25,7 +25,7 @@ export class TabLoginFormComponent implements OnInit {
   }
 
   public change() {
-    this.loginsService.updateLogin(this.formGroup.value);
+    this.loginsService.updateLogin({ ...this.login, ...this.formGroup.value });
   }
 
   public showPasswordClick() {

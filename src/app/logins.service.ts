@@ -29,10 +29,13 @@ export class LoginsService {
   }
 
   public updateLogin(login: Login) {
-    return this.http.patch<Login>('logins', login).subscribe((data) => {
-      this.logins[this.logins.findIndex((value) => value._id === login._id)] =
-        data;
-    });
+    return this.http
+      .patch<Login>(`logins/${login._id}`, login)
+      .subscribe((data) => {
+        const index = this.logins.findIndex((value) => value._id == data._id);
+        this.logins[index].password = data.password;
+        this.logins[index].username = data.username;
+      });
   }
 
   public deleteLogin(login: Login) {

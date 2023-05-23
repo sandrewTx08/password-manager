@@ -44,9 +44,13 @@ public class LoginController {
         return loginService.insertLogin(login);
     }
 
-    @PatchMapping
-    public Login updateLogin(Login login) {
-        return loginService.updateLogin(login);
+    @PatchMapping("{loginId}")
+    public Login updateLogin(@PathVariable ObjectId loginId, @Validated @RequestBody Login login) {
+        login.setUser(userDetailsServiceImpl
+                .getPrincipal()
+                .getUser());
+
+        return loginService.updateLogin(loginId, login);
     }
 
     @DeleteMapping("{loginId}")
