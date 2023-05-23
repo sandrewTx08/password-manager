@@ -11,18 +11,18 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<User> findById(ObjectId userId) {
+    public Optional<User> findUserById(ObjectId userId) {
         return userRepository.findById(userId);
     }
 
-    public Optional<User> findByEmail(String userEmail) {
+    public Optional<User> findUserByEmail(String userEmail) {
         return userRepository.findByEmail(userEmail);
     }
 
     public User insertUser(User user) throws UserAlreadyExistsException {
-        Boolean existsById = userRepository.existsByEmail(user.getEmail());
+        Boolean existsByEmail = userRepository.existsByEmail(user.getEmail());
 
-        if (!existsById)
+        if (!existsByEmail)
             return userRepository.insert(user);
 
         throw new UserAlreadyExistsException();

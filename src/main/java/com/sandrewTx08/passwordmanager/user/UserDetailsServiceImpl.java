@@ -14,7 +14,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetailsImpl loadUserByUsername(String userEmail) throws UsernameNotFoundException {
         return userService
-                .findByEmail(userEmail)
+                .findUserByEmail(userEmail)
                 .map(UserDetailsImpl::new)
                 .orElseThrow();
     }
