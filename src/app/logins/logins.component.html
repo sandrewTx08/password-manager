@@ -1,40 +1,44 @@
-<div class="row">
-  <div class="col-3">
-    <div class="mb-2 d-flex justify-content-end">
+<div class="row g-0 mt-3">
+  <div class="col-5">
+    <div class="mb-2 d-flex justify-content-end border-bottom pb-3">
       <button class="btn-primary btn" (click)="selected = null">Create</button>
     </div>
 
-    <div class="list-group overflow-scroll vh-100">
+    <div
+      class="list-group vh-100"
+      style="overflow-y: scroll; border-radius: 0 !important"
+    >
       <div
         (click)="selected = login"
         *ngFor="let login of loginsService.logins"
         href="#"
         class="list-group-item list-group-item-action text-break {{
-          selected?._id === login._id && 'active'
+          selected?._id === login._id ? 'active' : ''
         }}"
+        style="border: 0 !important"
         (aria-current)="(selected?._id === login._id)"
       >
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{ login.domain }}</h5>
-          <small class="{{ !(selected?._id === login._id) && 'text-muted' }}"
-            >3 days ago</small
+          <small
+            class="{{ selected?._id !== login._id ? 'text-muted' : '' }}"
+            >{{ login.created_at | date : "shortDate" }}</small
           >
         </div>
-        <small class="{{ !(selected?._id === login._id) && 'text-muted' }}">{{
+        <small class="{{ selected?._id !== login._id ? 'text-muted' : '' }}">{{
           login.username
         }}</small>
       </div>
     </div>
   </div>
 
-  <div class="col-9">
-    <div heading="Create login" *ngIf="!selected">
-      <app-create-login-form></app-create-login-form>
-    </div>
+  <div class="col-7 p-4">
+    <app-create-login-form *ngIf="!selected"></app-create-login-form>
 
     <app-tab-login-form
       *ngIf="selected"
       [login]="selected"
+      (deletion)="selected = null"
     ></app-tab-login-form>
   </div>
 </div>

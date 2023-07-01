@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Login, LoginsService } from '../logins.service';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -10,6 +10,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class TabLoginFormComponent implements OnInit {
   @Input()
   public login: Login = Object();
+
+  @Output()
+  public deletion: EventEmitter<void> = new EventEmitter<void>();
+
   public formGroup: FormGroup = Object();
 
   public showPassword: boolean = false;

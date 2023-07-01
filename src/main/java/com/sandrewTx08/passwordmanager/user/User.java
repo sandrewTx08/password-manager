@@ -20,8 +20,8 @@ public class User {
         return _id.toString();
     }
 
-    public void set_id(ObjectId _Id) {
-        this._id = _Id;
+    public void set_id(ObjectId _id) {
+        this._id = _id;
     }
 
     public String getEmail() {

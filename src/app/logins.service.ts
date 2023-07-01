@@ -6,6 +6,7 @@ export interface Login {
   domain: string;
   username: string | null;
   password: string;
+  created_at: number;
 }
 
 @Injectable({
@@ -23,9 +24,20 @@ export class LoginsService {
   }
 
   public createLogin(login: Login): void {
-    this.http.post<Login>('logins', login).subscribe((data) => {
-      this.logins.push(data);
-    });
+    login.created_at = new Date().getTime();
+    login._id = login.created_at.toString();
+
+    const index = this.logins.push(login) - 1;
+
+    this.http
+      .post<Login>('logins', {
+        domain: login.domain,
+        password: login.password,
+        username: login.username,
+      } as Login)
+      .subscribe((data) => {
+        this.logins[index] = data;
+      });
   }
 
   public updateLogin(login: Login): void {

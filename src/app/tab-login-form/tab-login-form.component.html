@@ -6,7 +6,13 @@
 
     <div class="d-flex gap-3 col justify-content-end">
       <button class="btn btn-warning" (click)="editing = !editing">Edit</button>
-      <button class="btn btn-danger" (click)="deleteLogin()">Remove</button>
+      <button
+        class="btn btn-danger"
+        (click)="deleteLogin()"
+        (click)="deletion.emit()"
+      >
+        Remove
+      </button>
     </div>
   </div>
 

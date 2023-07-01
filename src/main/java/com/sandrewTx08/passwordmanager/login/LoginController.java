@@ -43,7 +43,7 @@ public class LoginController {
         return loginService.insertLogin(login);
     }
 
-    @PatchMapping()
+    @PatchMapping
     public Login updateLogin(@Validated @RequestBody Login login) {
         login.setUser(userDetailsServiceImpl
                 .getPrincipal()
@@ -52,7 +52,7 @@ public class LoginController {
         return loginService.updateLogin(login);
     }
 
-    @DeleteMapping()
+    @DeleteMapping
     public void deleteLogin(@Validated @RequestBody Login login) {
         loginService.deleteLogin(login);
     }

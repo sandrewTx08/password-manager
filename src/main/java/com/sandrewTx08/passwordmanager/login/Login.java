@@ -23,6 +23,10 @@ public class Login {
     @NonNull
     private String password;
 
+    public Long getCreated_at() {
+        return _id.getDate().getTime();
+    }
+
     public String get_id() {
         return _id.toString();
     }

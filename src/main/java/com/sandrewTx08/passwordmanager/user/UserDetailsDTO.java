@@ -3,7 +3,7 @@ package com.sandrewTx08.passwordmanager.user;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsDTO {
-    public String email;
+    private String email;
 
     public String getEmail() {
         return email;
