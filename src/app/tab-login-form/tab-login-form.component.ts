@@ -15,7 +15,7 @@ export class TabLoginFormComponent implements OnInit {
   public showPassword: boolean = false;
   public editing: boolean = false;
 
-  constructor(private loginsService: LoginsService) {}
+  public constructor(private loginsService: LoginsService) {}
 
   public ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -24,19 +24,11 @@ export class TabLoginFormComponent implements OnInit {
     });
   }
 
-  public change() {
+  public change(): void {
     this.loginsService.updateLogin({ ...this.login, ...this.formGroup.value });
   }
 
-  public showPasswordClick() {
-    this.showPassword = !this.showPassword;
-  }
-
-  public editingClick() {
-    this.editing = !this.editing;
-  }
-
-  public deleteLogin() {
+  public deleteLogin(): void {
     this.loginsService.deleteLogin(this.login);
   }
 }

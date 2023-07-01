@@ -1,28 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-export interface UserDetails {
-  user: {
-    _id: string;
-    email: string;
-  };
+interface UserDetails {
+  email: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserdetailsService {
-  public userDetails: UserDetails = {
-    user: {
-      _id: String(),
-      email: String(),
-    },
-  };
+  public userDetails: UserDetails = { email: '' };
 
-  constructor(private http: HttpClient) {}
+  public constructor(private http: HttpClient) {}
 
-  public setUserDetails() {
-    return this.http.get<UserDetails>('userdetails').subscribe((data) => {
+  public setUserDetails(): void {
+    this.http.get<UserDetails>('userdetails').subscribe((data) => {
       this.userDetails = data;
     });
   }

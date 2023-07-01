@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { LoginsComponent } from './logins/logins.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateLoginFormComponent } from './create-login-form/create-login-form.component';
@@ -23,9 +22,8 @@ import { TabLoginFormComponent } from './tab-login-form/tab-login-form.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BsDropdownModule.forRoot(),
+    BsDropdownModule,
     BrowserAnimationsModule,
-    TabsModule,
     HttpClientModule,
     ReactiveFormsModule,
   ],

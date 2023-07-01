@@ -1,9 +1,40 @@
-<tabset class="d-flex gap-4" [vertical]="true" type="pills">
-  <tab heading="Create login"
-    ><app-create-login-form></app-create-login-form
-  ></tab>
+<div class="row">
+  <div class="col-3">
+    <div class="mb-2 d-flex justify-content-end">
+      <button class="btn-primary btn" (click)="selected = null">Create</button>
+    </div>
 
-  <tab *ngFor="let login of loginsService.logins" heading="{{ login.domain }}">
-    <app-tab-login-form [login]="login"></app-tab-login-form>
-  </tab>
-</tabset>
+    <div class="list-group overflow-scroll vh-100">
+      <div
+        (click)="selected = login"
+        *ngFor="let login of loginsService.logins"
+        href="#"
+        class="list-group-item list-group-item-action text-break {{
+          selected?._id === login._id && 'active'
+        }}"
+        (aria-current)="(selected?._id === login._id)"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ login.domain }}</h5>
+          <small class="{{ !(selected?._id === login._id) && 'text-muted' }}"
+            >3 days ago</small
+          >
+        </div>
+        <small class="{{ !(selected?._id === login._id) && 'text-muted' }}">{{
+          login.username
+        }}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div heading="Create login" *ngIf="!selected">
+      <app-create-login-form></app-create-login-form>
+    </div>
+
+    <app-tab-login-form
+      *ngIf="selected"
+      [login]="selected"
+    ></app-tab-login-form>
+  </div>
+</div>

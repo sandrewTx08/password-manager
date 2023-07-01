@@ -19,12 +19,12 @@ public class LoginService {
         return loginRepository.insert(login);
     }
 
-    public Login updateLogin(ObjectId logindId, Login login) {
-        loginRepository.deleteById(logindId);
+    public Login updateLogin(Login login) {
+        loginRepository.delete(login);
         return loginRepository.save(login);
     }
 
-    public void deleteLogin(ObjectId logindId) {
-        loginRepository.deleteById(logindId);
+    public void deleteLogin(Login login) {
+        loginRepository.delete(login);
     }
 }

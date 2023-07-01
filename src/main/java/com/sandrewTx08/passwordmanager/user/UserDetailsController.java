@@ -11,8 +11,8 @@ class UserDetailsController {
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
 
-    @GetMapping
-    public UserDetailsImpl getPrincipal() {
-        return userDetailsServiceImpl.getPrincipal();
+    @GetMapping()
+    public UserDetailsDTO getPrincipal() {
+        return new UserDetailsDTO(userDetailsServiceImpl.getPrincipal());
     }
 }

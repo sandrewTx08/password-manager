@@ -16,13 +16,9 @@ export class CreateLoginFormComponent {
     password: new FormControl(),
   });
 
-  constructor(private loginsService: LoginsService) {}
+  public constructor(private loginsService: LoginsService) {}
 
-  public ngSubmit() {
+  public ngSubmit(): void {
     this.loginsService.createLogin(this.formGroup.value);
-  }
-
-  public showPasswordClick() {
-    this.showPassword = !this.showPassword;
   }
 }

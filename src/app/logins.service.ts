@@ -14,33 +14,31 @@ export interface Login {
 export class LoginsService {
   public logins: Login[] = Array();
 
-  constructor(private http: HttpClient) {}
+  public constructor(private http: HttpClient) {}
 
-  public findManyLogins() {
-    return this.http.get<Login[]>('logins').subscribe((data) => {
+  public findAllUserLogins(): void {
+    this.http.get<Login[]>('logins').subscribe((data) => {
       this.logins = data;
     });
   }
 
-  public createLogin(login: Login) {
-    return this.http.post<Login>('logins', login).subscribe((data) => {
+  public createLogin(login: Login): void {
+    this.http.post<Login>('logins', login).subscribe((data) => {
       this.logins.push(data);
     });
   }
 
-  public updateLogin(login: Login) {
-    return this.http
-      .patch<Login>(`logins/${login._id}`, login)
-      .subscribe((data) => {
-        const index = this.logins.findIndex((value) => value._id == data._id);
-        this.logins[index].password = data.password;
-        this.logins[index].username = data.username;
-      });
+  public updateLogin(login: Login): void {
+    const index = this.logins.findIndex((value) => value._id == login._id);
+    this.logins[index].password = login.password;
+    this.logins[index].username = login.username;
+
+    this.http.patch<Login>('logins', login).subscribe();
   }
 
-  public deleteLogin(login: Login) {
-    return this.http.delete<void>(`logins/${login._id}`).subscribe(() => {
-      this.logins = this.logins.filter((value) => value._id != login._id);
-    });
+  public deleteLogin(login: Login): void {
+    this.logins = this.logins.filter((value) => value._id != login._id);
+
+    this.http.delete<void>('logins', { body: login }).subscribe();
   }
 }

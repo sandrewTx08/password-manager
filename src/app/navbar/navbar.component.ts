@@ -7,5 +7,5 @@ import { UserdetailsService } from '../userdetails.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(public userDetailsService: UserdetailsService) {}
+  public constructor(public userDetailsService: UserdetailsService) {}
 }
