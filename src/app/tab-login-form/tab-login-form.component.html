@@ -5,14 +5,12 @@
     </div>
 
     <div class="d-flex gap-3 col justify-content-end">
-      <button class="btn btn-warning" (click)="editing = !editing">Edit</button>
-      <button
-        class="btn btn-danger"
+      <div (click)="editing = !editing" class="bi fs-3 bi-pencil-square"></div>
+      <div
+        class="bi fs-3 bi-trash3-fill"
         (click)="deleteLogin()"
         (click)="deletion.emit()"
-      >
-        Remove
-      </button>
+      ></div>
     </div>
   </div>
 
@@ -27,7 +25,7 @@
       (change)="change()"
     />
     <label for="floatingInput">Username</label>
-    <button class="btn btn-outline-secondary" type="button">Copy</button>
+    <div class="bi fs-3 bi-clipboard2-fill"></div>
   </div>
 
   <div *ngIf="!editing">
@@ -35,7 +33,7 @@
     <div class="fs-4">{{ login.username }}</div>
   </div>
 
-  <div class="form-floating d-flex gap-2" *ngIf="editing">
+  <div class="form-floating d-flex gap-4 align-items-center" *ngIf="editing">
     <input
       [type]="showPassword ? 'text' : 'password'"
       class="form-control"
@@ -47,14 +45,11 @@
       (change)="change()"
     />
     <label for="floatingPassword">Password</label>
-    <button
-      class="btn btn-outline-secondary"
-      type="button"
+    <div
+      class="bi fs-3 {{ showPassword ? 'bi-eye-fill' : 'bi-eye-slash-fill' }}"
       (click)="showPassword = !showPassword"
-    >
-      Show
-    </button>
-    <button class="btn btn-outline-secondary" type="button">Copy</button>
+    ></div>
+    <div class="bi fs-3 bi-clipboard2-fill"></div>
   </div>
 
   <div *ngIf="!editing">
