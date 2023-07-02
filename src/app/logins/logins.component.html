@@ -19,7 +19,10 @@
         (aria-current)="(selected?._id === login._id)"
       >
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">{{ login.domain }}</h5>
+          <div class="d-flex gap-2">
+            <div class="bi fs-6 bi-globe2"></div>
+            <h5 class="mb-1">{{ login.domain }}</h5>
+          </div>
           <small
             class="{{ selected?._id !== login._id ? 'text-muted' : '' }}"
             >{{ login.created_at | date : "shortDate" }}</small
