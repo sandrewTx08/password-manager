@@ -5,46 +5,44 @@
 >
   <h1>Create a login</h1>
 
-  <div class="input-group">
+  <div class="form-floating mb-3">
     <input
       type="text"
       class="form-control"
+      id="floatingDomain"
       formControlName="domain"
-      placeholder="Recipient's domain"
-      aria-label="Recipient's domain with one button addons"
-      formControlName="domain"
+      placeholder="https://example.com"
     />
-    <button class="btn btn-outline-secondary" type="button">Copy</button>
+    <label for="floatingDomain">Domain</label>
   </div>
 
-  <div class="input-group">
+  <div class="form-floating mb-3">
     <input
       type="text"
       class="form-control"
-      placeholder="Recipient's username"
-      aria-label="Recipient's username with one button addons"
+      id="floatingUsername"
       formControlName="username"
+      placeholder="username123"
     />
-    <button class="btn btn-outline-secondary" type="button">Copy</button>
+    <label for="floatingUsername">Username</label>
   </div>
 
-  <div class="input-group">
+  <div
+    class="form-floating mb-3 d-flex justify-content-between align-items-center gap-2"
+  >
     <input
       [type]="showPassword ? 'text' : 'password'"
       class="form-control"
-      placeholder="Recipient's password"
+      id="floatingUsername"
       formControlName="password"
-      aria-label="Recipient's password with two button addons"
-      formControlName="password"
+      placeholder="username123"
     />
-    <button
-      class="btn btn-outline-secondary"
-      type="button"
+    <label for="floatingUsername">Password</label>
+
+    <div
+      class="bi fs-3 {{ showPassword ? 'bi-eye-fill' : 'bi-eye-slash-fill' }}"
       (click)="showPassword = !showPassword"
-    >
-      Show
-    </button>
-    <button class="btn btn-outline-secondary" type="button">Copy</button>
+    ></div>
   </div>
 
   <button class="btn btn-secondary d-inline" type="submit">Submit</button>
