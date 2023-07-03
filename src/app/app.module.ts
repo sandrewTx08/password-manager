@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreateLoginFormComponent } from './create-login-form/create-login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TabLoginFormComponent } from './tab-login-form/tab-login-form.component';
+import { LoginsFilterPipe } from './logins-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { TabLoginFormComponent } from './tab-login-form/tab-login-form.component
     NavbarComponent,
     CreateLoginFormComponent,
     TabLoginFormComponent,
+    LoginsFilterPipe,
   ],
   imports: [
     BrowserModule,

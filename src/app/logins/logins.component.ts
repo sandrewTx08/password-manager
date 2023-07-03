@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserdetailsService } from '../userdetails.service';
 import { Login, LoginsService } from '../logins.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-logins',
@@ -9,6 +10,9 @@ import { Login, LoginsService } from '../logins.service';
 })
 export class LoginsComponent implements OnInit {
   public selected: Login | null = null;
+
+  public loginsFilterSearchInput: FormControl<string | null> =
+    new FormControl<string>('');
 
   public constructor(
     private userDetailsService: UserdetailsService,
