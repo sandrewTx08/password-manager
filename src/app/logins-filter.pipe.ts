@@ -6,8 +6,8 @@ import { Login } from './logins.service';
 })
 export class LoginsFilterPipe implements PipeTransform {
   transform(logins: Login[], search: string | null): Login[] {
-    return logins.filter((login) =>
-      search ? JSON.stringify(login).includes(search) : true
+    return logins.filter(({ domain, username }: Partial<Login>) =>
+      search ? JSON.stringify({ domain, username }).includes(search) : true
     );
   }
 }
