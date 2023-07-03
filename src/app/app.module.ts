@@ -11,6 +11,7 @@ import { CreateLoginFormComponent } from './create-login-form/create-login-form.
 import { ReactiveFormsModule } from '@angular/forms';
 import { TabLoginFormComponent } from './tab-login-form/tab-login-form.component';
 import { LoginsFilterPipe } from './logins-filter.pipe';
+import { CopyClipboardDirective } from './copy-clipboard.directive';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LoginsFilterPipe } from './logins-filter.pipe';
     CreateLoginFormComponent,
     TabLoginFormComponent,
     LoginsFilterPipe,
+    CopyClipboardDirective,
   ],
   imports: [
     BrowserModule,
